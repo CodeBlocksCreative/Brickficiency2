@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using WindmillHelix.Brickficiency2.DependencyInjection;
 using Autofac;
 using Brickficiency.UI;
+using System.Net;
 
 namespace Brickficiency
 {
@@ -23,6 +24,11 @@ namespace Brickficiency
             var container = DependencyInjectionConfig.Setup();
 
             var initializationForm = container.Resolve<InitializationForm>();
+
+            ServicePointManager.SecurityProtocol =
+                SecurityProtocolType.Tls12 |
+                SecurityProtocolType.Tls11 |
+                SecurityProtocolType.Tls;
 
             Application.Run(initializationForm);
         }
